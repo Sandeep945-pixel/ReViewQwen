@@ -13,29 +13,19 @@ Old Dominion University
 
 A negative review does not necessarily mean a seller failed to deliver what was promised. A review can describe an actual mismatch, a fulfilled promise, or a personal expectation absent from the listing. ReViewQwen uses both text and images to examine that distinction.
 
-| Class | Meaning | Illustrative case |
-| --- | --- | --- |
-| Agreement (`1`) | Buyer evidence agrees with the seller's claims | The selected blue mug arrived blue and matches the description |
-| Discrepancy (`0`) | Buyer evidence indicates a mismatch with the claims | The listing specifies blue, but the buyer describes and shows an orange mug |
-| Out of scope (`-1`) | The concern is a preference or expectation outside the stated claims | The buyer dislikes a style that was accurately pictured |
+| Class | Meaning |
+| --- | --- |
+| Agreement (`1`) | Buyer evidence agrees with the seller's claims |
+| Discrepancy (`0`) | Buyer evidence indicates a mismatch with the claims |
+| Out of scope (`-1`) | The concern is a preference or expectation outside the stated claims |
 
 These are evidence-consistency categories. They do not establish fraud, deception, or legal responsibility.
 
-## Method
+## Architecture
 
-The system adapts **Qwen2-VL-7B-Instruct** with **LoRA** for the buyer–seller comparison task. Its technical focus is task definition, domain adaptation, multimodal classification, and explanation generation. Qwen2-VL supplies the underlying vision-language architecture.
+![ReViewQwen architecture: seller and buyer images and text are processed into multimodal tokens for a model response.](docs/assets/architecture.png)
 
-```mermaid
-flowchart TD
-    S["Seller description and image"] --> P["Chat template and image processor"]
-    B["Buyer review and image"] --> P
-    P --> M["Qwen2-VL-7B-Instruct"]
-    A["ReViewQwen LoRA adapter"] --> M
-    M --> C["Agreement, discrepancy, or out of scope"]
-    M --> E["Evidence-based explanation"]
-    C --> H["Human review"]
-    E --> H
-```
+ReViewQwen adapts **Qwen2-VL-7B-Instruct** with **LoRA** for buyer–seller comparison.
 
 The released checkpoint is `domsoos/reviewqwen-large`, a LoRA adapter rather than a standalone 7B model. The demo loads the base model and attaches this adapter using PEFT.
 
@@ -79,11 +69,7 @@ python infer.py --example demo/example.json --validate-only
 
 This checks both text fields and opens both image files. It does not download weights or execute the model.
 
-The included input uses simple, generated illustrations of a blue seller mug and an orange buyer mug. It contains no customer data and is not part of the paper's evaluation. The colours differ deliberately; no model output or benchmark score is precomputed for this example.
-
-| Seller illustration | Buyer illustration |
-| --- | --- |
-| ![Fictional blue seller mug](demo/seller.png) | ![Fictional orange buyer mug](demo/buyer.png) |
+The bundled input is fictional and provided only to check the demo; it is not a paper evaluation example.
 
 ### 3. Run inference
 
