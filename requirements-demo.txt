@@ -1,0 +1,8 @@
+# Demo API versions, not a reconstruction of the paper's training environment.
+# Install the appropriate PyTorch build for your hardware first: https://pytorch.org/get-started/locally/
+torch>=2.4,<3
+transformers==4.49.0
+peft==0.13.2
+accelerate>=0.34,<2
+Pillow>=10,<12
+safetensors>=0.4.5,<1

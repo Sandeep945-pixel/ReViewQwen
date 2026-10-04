@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "Please cite the ReViewQwen paper when using or discussing this research."
+type: article
+title: "ReViewQwen: An Explainable Vision-Language Model for Discrepancy Detection in Multimodal E-Commerce Reviews"
+authors:
+  - family-names: Kalari
+    given-names: Sandeep
+  - family-names: Sunkara
+    given-names: Mohan Krishna
+  - family-names: Soós
+    given-names: Dominik
+  - family-names: Ashok
+    given-names: Vikas
+  - family-names: Mukkamala
+    given-names: Ravi
+doi: 10.1109/CBMI66578.2025.11339346
